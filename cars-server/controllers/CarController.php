@@ -31,7 +31,7 @@ function updateCar(){
     car::update($connection, ['name' => 'Mercedes', 'color' => 'Navy', 'year' => 2021]);
 }
 
-function deleteCar(){
+function static deleteCar(){
     global $connection;
     Car::delete($connection);
 }

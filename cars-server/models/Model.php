@@ -19,7 +19,7 @@ abstract class Model{
         
         return $types;
     }
-    public static function find(mysqli $connection, string $id){//read
+    public static function find(mysqli $connection, string $id){
         $sql = sprintf("SELECT * from %s WHERE %s = ?",
         static::$table,
         static::$primary_key);
@@ -50,11 +50,7 @@ abstract class Model{
             $placeholders);   
         $stmt = $connection->prepare($sql);     
         $types = '';
-        foreach ($values as $value) {
-            if (is_int($value)) $types .= 'i';
-            elseif (is_float($value)) $types .= 'd';
-            elseif (is_string($value)) $types .= 's';
-            else $types .= 'b';}  
+         
         $stmt->bind_param($types, ...$values);     
         $success = $stmt->execute();
         $stmt->close();
@@ -73,12 +69,7 @@ abstract class Model{
         $stmt = $connection->prepare($sql);
         $types = '';
 
-        foreach ($values as $value) {
-            if (is_int($value)) $types .= 'i';
-            elseif (is_float($value)) $types .= 'd';
-            elseif (is_string($value)) $types .= 's';
-            else $types .= 'b';
-        }
+        
 
         $types .= 'i';
         $values[] = $id;
