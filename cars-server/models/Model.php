@@ -5,7 +5,7 @@ abstract class Model{
     protected static string $primary_key = "id";
 
    
-    public static function getAllCars($data){
+    public static function getbind_paramTypes($data){
         $types="";
         foreach ($data as $key => $value) {
             if (gettype($value) == "string") {
@@ -30,17 +30,16 @@ abstract class Model{
         return $data ? new static($data) : null;
     }
 
-    public static function findall(mysqli $connection){
+    public static function findAll(mysqli $connection){
         $sql = sprintf("SELECT * from %s",
-        static::$table,
-        static::$primary_key);
+        static::$table,);
         $query = $connection->prepare($sql);
         $query->execute();               
         $data = $query->get_result()->fetch_assoc();
         return $data ? new static($data) : null;
     }
 
-    public static function create(mysqli $connection, array $data){
+    public function create(mysqli $connection, array $data){
         $columns = array_keys($data);
         $values = array_values($data);
         $placeholders = implode(',', array_fill(0, count($columns), '?'));
@@ -62,7 +61,7 @@ abstract class Model{
         return $success;
     }
 
-    public static function update(mysqli $connection, int $id, array $data){
+    public function update(mysqli $connection, int $id, array $data){
         $columns = array_keys($data);
         $values = array_values($data);
         $set_clause = implode(' = ?, ', $columns) . ' = ?';

@@ -9,7 +9,7 @@ function getCarByID(){
     
     if(isset($_GET["id"])){
         $id = $_GET["id"];
-        $car = Car::find($connection, $_GET["id"]);
+        $car = Car::find($connection, $id);
         echo ResponseService::response(200, $car->toArray());
         return;
     }
@@ -21,19 +21,19 @@ function getCarByID(){
     }
 }
 
-function createcar(){
+function createCar(){
     global $connection;
     Car::create($connection, ['name' => 'BMW', 'color' => 'black', 'year' => 2015]);
 }
 
-function updatecar(){
+function updateCar(){
     global $connection;
-    car::update($connection, 6, ['name' => 'Mercedes', 'color' => 'Navy', 'year' => 2021]);
+    car::update($connection, ['name' => 'Mercedes', 'color' => 'Navy', 'year' => 2021]);
 }
 
-function deletecar(){
+function deleteCar(){
     global $connection;
-    Car::delete($connection, 7);
+    Car::delete($connection);
 }
 
 ?>
