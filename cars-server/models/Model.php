@@ -57,7 +57,7 @@ abstract class Model{
         return $success;
     }
 
-    public function update(mysqli $connection, int $id, array $data){
+    public update(mysqli $connection, int $id, array $data){
         $columns = array_keys($data);
         $values = array_values($data);
         $set_clause = implode(' = ?, ', $columns) . ' = ?';
